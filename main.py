@@ -1,15 +1,15 @@
-# import core.storage as storage
-
-# print("Storage module loaded from:", storage.__file__)
-# print("Available names in storage:", dir(storage))
-
-
 
 import tkinter as tk
 from tkinter import messagebox
 from core.weather_api import get_weather
+
+import core.weather_api as weather_api
+print("Loaded weather_api from:", weather_api.__file__)
+print("get_weather signature:", weather_api.get_weather.__code__.co_varnames)
+
 from core.storage import (save_last_city, load_last_city, log_weather_data, get_user_settings)
 from core.error_handling import WeatherAPIError, ConfigError
+
 
 # Basic day/night themes (expand later)
 THEMES = {
