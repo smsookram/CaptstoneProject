@@ -1,28 +1,34 @@
+import os
 import requests
-from config import weather_api as config
+from dotenv import load_dotenv
 from core.error_handling import WeatherAPIError, ConfigError
 
-def get_weather(city):
-    api_key = config.OPENWEATHER_API_KEY
-    if not api_key:
-        raise ConfigError("Missing OpenWeather API key.")
+load_dotenv()
+API_KEY = os.getenv("OPENWEATHER_API_KEY")
 
-    url = "https://api.openweathermap.org/data/2.5/weather"
-    params = {"q": city, "appid": api_key, "units": "metric"}
+if not API_KEY:
+    raise ConfigError("Missing OpenWeather API key in .env file")
+
+def get_weather(city, units="metric"):
+    url = "http://api.openweathermap.org/data/2.5/weather"
+    params = {
+        "q": city,
+        "appid": API_KEY,
+        "units": units
+    }
 
     try:
         response = requests.get(url, params=params)
-        response.raise_for_status()
         data = response.json()
+
+        if response.status_code != 200:
+            raise WeatherAPIError(data.get("message", "API request failed."))
 
         return {
             "city": data["name"],
-            "temp": data["main"]["temp"],
-            "feels_like": data["main"]["feels_like"],
-            "humidity": data["main"]["humidity"],
+            "temp": round(data["main"]["temp"]),
             "description": data["weather"][0]["description"]
         }
 
-    except requests.exceptions.RequestException as e:
-        raise WeatherAPIError(f"API request failed: {e}")
-
+    except requests.RequestException as e:
+        raise WeatherAPIError(str(e))
