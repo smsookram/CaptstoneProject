@@ -1,54 +1,38 @@
+# core/storage.py
+
 import os
 from datetime import datetime
-import configparser
 
-# Set up path to /data folder (relative to this file)
-DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
-LAST_CITY_PATH = os.path.join(DATA_DIR, "last_city.txt")
-HISTORY_PATH = os.path.join(DATA_DIR, "weather_history.txt")
-SETTINGS_PATH = os.path.join(os.path.dirname(__file__), "..", "config", "settings.ini")
+DATA_DIR = "data"
+LAST_CITY_FILE = os.path.join(DATA_DIR, "last_city.txt")
+HISTORY_FILE = os.path.join(DATA_DIR, "weather_history.txt")
+SETTINGS_FILE = os.path.join(DATA_DIR, "settings.txt")
 
-# --------- Save/Load Last City --------- #
+def save_last_city(city):
+    with open(LAST_CITY_FILE, "w") as f:
+        f.write(city)
 
-def save_last_city(city, filename=LAST_CITY_PATH):
-    os.makedirs(os.path.dirname(filename), exist_ok=True)
-    with open(filename, "w") as f:
-        f.write(city.strip())
-
-def load_last_city(filename=LAST_CITY_PATH):
-    try:
-        with open(filename, "r") as f:
+def load_last_city():
+    if os.path.exists(LAST_CITY_FILE):
+        with open(LAST_CITY_FILE, "r") as f:
             return f.read().strip()
-    except FileNotFoundError:
-        return None
+    return None
 
-# --------- Log Weather History --------- #
-
-def log_weather_data(city, temp, desc, filename=HISTORY_PATH):
-    os.makedirs(os.path.dirname(filename), exist_ok=True)
-    date = datetime.now().strftime("%Y-%m-%d")
-    with open(filename, "a") as f:
-        f.write(f"{date},{city},{temp},{desc}\n")
-
-# --------- Load/Save Settings (theme/units) --------- #
+def log_weather_data(city, temp, desc):
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
+    with open(HISTORY_FILE, "a") as f:
+        f.write(f"{timestamp},{city},{temp},{desc}\n")
 
 def get_user_settings():
-    config = configparser.ConfigParser()
-    if not os.path.exists(SETTINGS_PATH):
-        return {"theme": "day", "units": "metric"}
+    default_settings = {"theme": "day", "units": "metric"}
+    if not os.path.exists(SETTINGS_FILE):
+        return default_settings
+    settings = {}
+    with open(SETTINGS_FILE, "r") as f:
+        for line in f:
+            if "=" in line:
+                key, val = line.strip().split("=", 1)
+                settings[key] = val
+    return {**default_settings, **settings}
 
-    config.read(SETTINGS_PATH)
-    return {
-        "theme": config.get("Preferences", "theme", fallback="day"),
-        "units": config.get("Preferences", "units", fallback="metric")
-    }
-
-def save_user_settings(theme="day", units="metric"):
-    config = configparser.ConfigParser()
-    config["Preferences"] = {
-        "theme": theme,
-        "units": units
-    }
-    with open(SETTINGS_PATH, "w") as f:
-        config.write(f)
 

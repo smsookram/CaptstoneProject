@@ -1,1 +1,6 @@
 2025-06-30,New York,33,clear sky
+2025-06-30,New York,26,broken clouds
+2025-06-30,Los Angeles,27,clear sky
+2025-06-30,Los Angeles,27,clear sky
+2025-06-30,Los Angeles,27,clear sky
+2025-06-30,New York,26,clear sky

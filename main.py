@@ -1,100 +1,140 @@
-
 import tkinter as tk
 from tkinter import messagebox
+from datetime import datetime
+
 from core.weather_api import get_weather
+from core.storage import (
+    save_last_city, load_last_city, log_weather_data, get_user_settings
+)
+from core.error_handling import WeatherAPIError
+from utils.style import THEMES, apply_theme
 
-import core.weather_api as weather_api
-print("Loaded weather_api from:", weather_api.__file__)
-print("get_weather signature:", weather_api.get_weather.__code__.co_varnames)
-print("get_weather signature:", weather_api.get_weather.__code__.co_varnames)
+class WeatherApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Weather App")
+        self.root.geometry("600x400")
+        self.root.resizable(True, True)
 
-from core.storage import (save_last_city, load_last_city, log_weather_data, get_user_settings)
-from core.error_handling import WeatherAPIError, ConfigError
+        # Load settings
+        self.settings = get_user_settings()
+        self.units = self.settings.get("units", "metric")
 
-
-# Basic day/night themes (expand later)
-THEMES = {
-    "day": {
-        "bg": "#ffffff",
-        "fg": "#000000",
-        "font": ("Helvetica", 12)
-    },
-    "night": {
-        "bg": "#1a1a1a",
-        "fg": "#f5f5f5",
-        "font": ("Helvetica", 12)
-    }
-}
-
-# Load settings and theme
-settings = get_user_settings()
-current_theme = THEMES.get(settings["theme"], THEMES["day"])
-units = settings["units"]
-
-def fetch_weather():
-    city = city_entry.get().strip()
-    if not city:
-        messagebox.showerror("Input Error", "Please enter a city name.")
-        return
-
-    try:
-        weather = get_weather(city, units=units)  # uses preferred unit (metric/imperial)
-        if weather:
-            # Update GUI
-            city_label.config(text=f"{weather['city']}")
-            temp_label.config(text=f"{weather['temp']}°")
-            desc_label.config(text=weather["description"].title())
-
-            # Save and log
-            save_last_city(city)
-            log_weather_data(
-                city=weather["city"],
-                temp=weather["temp"],
-                desc=weather["description"]
-            )
+        # Detect time and assign day/night
+        current_hour = datetime.now().hour
+        if 6 <= current_hour < 18:
+            self.time_theme = "day"
         else:
-            messagebox.showerror("Weather Error", "Could not fetch weather data.")
+            self.time_theme = "night"
 
-    except Exception as e:
-        messagebox.showerror("Error", f"Something went wrong:\n{e}")
+        self.visual_theme = self.settings.get("theme", "anime")  # default to anime
+        self.current_theme = THEMES.get(self.visual_theme, THEMES["anime"])
+
+        # Setup UI
+        self.create_widgets()
+        apply_theme(self.root, self.current_theme)
+
+        # Preload last city
+        last_city = load_last_city()
+        if last_city:
+            self.city_entry.insert(0, last_city)
+            self.fetch_weather()
+
+    def create_widgets(self):
+        self.city_entry = tk.Entry(
+            self.root,
+            font=self.current_theme["font"],
+            bg=self.current_theme["bg"],
+            fg=self.current_theme["fg"]
+        )
+        self.city_entry.grid(row=0, column=0, padx=10, pady=10, sticky="ew")
+        self.root.grid_columnconfigure(0, weight=1)
+
+        self.fetch_button = tk.Button(
+            self.root,
+            text="Get Weather",
+            command=self.fetch_weather,
+            bg=self.current_theme["fg"],
+            fg=self.current_theme["bg"]
+        )
+        self.fetch_button.grid(row=0, column=1, padx=10, pady=10)
+
+        self.theme_button = tk.Button(
+            self.root,
+            text="Toggle Theme",
+            command=self.toggle_theme,
+            bg=self.current_theme["fg"],
+            fg=self.current_theme["bg"]
+        )
+        self.theme_button.grid(row=0, column=2, padx=10, pady=10)
+
+        self.city_label = tk.Label(
+            self.root,
+            text="",
+            font=self.current_theme["font"],
+            bg=self.current_theme["bg"],
+            fg=self.current_theme["fg"]
+        )
+        self.city_label.grid(row=1, column=0, columnspan=3, pady=10)
+
+        self.temp_label = tk.Label(
+            self.root,
+            text="",
+            font=self.current_theme["font"],
+            bg=self.current_theme["bg"],
+            fg=self.current_theme["fg"]
+        )
+        self.temp_label.grid(row=2, column=0, columnspan=3)
+
+        self.desc_label = tk.Label(
+            self.root,
+            text="",
+            font=self.current_theme["font"],
+            bg=self.current_theme["bg"],
+            fg=self.current_theme["fg"]
+        )
+        self.desc_label.grid(row=3, column=0, columnspan=3)
+
+    def fetch_weather(self):
+        city = self.city_entry.get().strip()
+        if not city:
+            messagebox.showerror("Input Error", "Please enter a city name.")
+            return
+
+        try:
+            weather = get_weather(city, units=self.units)
+            if weather:
+                self.city_label.config(text=weather["city"])
+                self.temp_label.config(text=f"{weather['temp']}°")
+                self.desc_label.config(text=weather["description"].title())
+
+                save_last_city(city)
+                log_weather_data(city=weather["city"], temp=weather["temp"], desc=weather["description"])
+            else:
+                messagebox.showerror("Weather Error", "Could not fetch weather data.")
+        except Exception as e:
+            messagebox.showerror("Error", f"Something went wrong:\n{e}")
+
+    def toggle_theme(self):
+        self.visual_theme = "marvel" if self.visual_theme == "anime" else "anime"
+        self.current_theme = THEMES.get(self.visual_theme)
+        apply_theme(self.root, self.current_theme)
+
+        # Update widgets
+        widgets = [
+            self.city_entry, self.fetch_button, self.theme_button,
+            self.city_label, self.temp_label, self.desc_label
+        ]
+        for widget in widgets:
+            widget.config(
+                bg=self.current_theme["bg"],
+                fg=self.current_theme["fg"],
+                font=self.current_theme["font"]
+            )
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = WeatherApp(root)
+    root.mainloop()
 
 
-# GUI setup
-root = tk.Tk()
-root.title("Weather App")
-root.geometry("400x400")
-
-#apply theme colors
-root.configure(bg=current_theme["bg"])
-
-city_entry = tk.Entry(root, font=current_theme["font"], bg=current_theme["bg"], fg=current_theme["fg"])
-city_entry.pack(pady=10)
-
-fetch_button = tk.Button(root, text="Get Weather", command=fetch_weather, bg=current_theme["fg"], fg=current_theme["bg"])
-fetch_button.pack(pady=5)
-
-
-weather_label = tk.Label(root, text="", font=("Arial", 14))
-weather_label.pack(pady=20)
-
-city_label = tk.Label(root, text="", font=current_theme["font"], bg=current_theme["bg"], fg=current_theme["fg"])
-city_label.pack(pady=5)
-
-temp_label = tk.Label(root, text="", font=current_theme["font"], bg=current_theme["bg"], fg=current_theme["fg"])
-temp_label.pack(pady=5)
-
-desc_label = tk.Label(root, text="", font=current_theme["font"], bg=current_theme["bg"], fg=current_theme["fg"])
-desc_label.pack(pady=5)
- 
-
-settings = get_user_settings()
-current_theme = THEMES.get(settings["theme"], THEMES["day"])
-units = settings["units"]
-
-# Preload last city
-last_city = load_last_city()
-if last_city:
-    city_entry.insert(0, last_city)
-    fetch_weather()
-
-root.mainloop()

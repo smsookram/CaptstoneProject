@@ -71,3 +71,35 @@ Fill in your planned data files or tables:
 
 File/Table Name	Format (txt, json, csv, other)	Example Row
 weather_history.txt	txt	2025-06-09,New Brunswick,78,Sunny
+
+| File/Table Name      | Format | Example Row                                      |
+| -------------------- | ------ | ------------------------------------------------ |
+| weather\_history.txt | txt    | 2025-06-09,New Brunswick,78,Sunny                |
+| last\_city.txt       | txt    | New Brunswick                                    |
+| settings.ini         | ini    | `[Preferences]``theme=day``units=metric` |
+
+Section 5: Personal Project Timeline (Weeks 12–17)
+Customize based on your availability:
+
+Week	Monday	Tuesday	Wednesday	Thursday	Key Milestone
+12	API setup	Error handling	Tkinter shell	Buffer day	Basic working app
+13	Feature 1			Integrate	Feature 1 complete
+14	Feature 2 start		Review & test	Finish	Feature 2 complete
+15	Feature 3	Polish UI	Error passing	Refactor	All features complete
+16	Enhancement	Docs	Tests	Packaging	Ready-to-ship app
+17	Rehearse	Buffer	Showcase	–	Demo Day
+
+Section 6: Risk Assessment
+Identify at least 3 potential risks and how you’ll handle them.
+
+| Risk                        | Likelihood | Impact | Mitigation Plan                                                 
+| API Rate Limit              | Medium     | Medium | Cache recent weather results to avoid repeated calls; add delay/retry logic on failure.             |
+| Missing/Invalid API Key     | Low        | High   | Check API key presence on app startup; show clear error and instructions if missing or invalid.     |
+| Network Connectivity Issues | Medium     | High   | Gracefully handle network errors with user-friendly messages; allow offline mode with cached data.  |
+| File Read/Write Errors      | Low        | Medium | Use try-except blocks for file operations; inform user if saving/loading fails and fallback safely. |
+
+
+Section 7: Support Requests
+What specific help will you ask for in office hours or on Slack?
+I am not sure yet, probably help with code
+

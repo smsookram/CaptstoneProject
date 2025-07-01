@@ -1,3 +1,5 @@
+# core/weather_api.py
+
 import os
 import requests
 from dotenv import load_dotenv
