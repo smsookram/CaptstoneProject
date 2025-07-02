@@ -1,140 +1,88 @@
-import tkinter as tk
+import customtkinter as ctk
 from tkinter import messagebox
 from datetime import datetime
-
 from core.weather_api import get_weather
-from core.storage import (
-    save_last_city, load_last_city, log_weather_data, get_user_settings
-)
-from core.error_handling import WeatherAPIError
-from utils.style import THEMES, apply_theme
+from core.storage import save_last_city, load_last_city, log_weather_data
+from core.theme_selector import select_theme
+from utils.style import get_color_theme
+from utils.style import FONT_LG, FONT_MD, FONT_SM, ENTRY_WIDTH, TABVIEW_SIZE
 
-class WeatherApp:
-    def __init__(self, root):
-        self.root = root
-        self.root.title("Weather App")
-        self.root.geometry("600x400")
-        self.root.resizable(True, True)
+...
 
-        # Load settings
-        self.settings = get_user_settings()
-        self.units = self.settings.get("units", "metric")
+tabview = ctk.CTkTabview(app, width=TABVIEW_SIZE[0], height=TABVIEW_SIZE[1])
+...
+city_entry = ctk.CTkEntry(weather_tab, placeholder_text="Enter City", width=ENTRY_WIDTH, height=35)
 
-        # Detect time and assign day/night
-        current_hour = datetime.now().hour
-        if 6 <= current_hour < 18:
-            self.time_theme = "day"
+
+# ==== Initialize customtkinter ====
+ctk.set_appearance_mode("System")  # Auto switch between light/dark
+ctk.set_default_color_theme("blue")  # Can be "dark-blue", "green", "dark-blue", etc.
+
+
+# ==== Ask user to choose theme ====
+user_theme = select_theme()  # Assume this returns "marvel" or "anime"
+bg_color, text_color, accent_color = get_color_theme(user_theme)
+
+# ==== Create App Window ====
+app = ctk.CTk()
+app.title("Weather Dashboard")
+app.geometry("700x500")
+app.configure(fg_color=bg_color)
+
+# ==== Tabs using CTkTabview ====
+tabview = ctk.CTkTabview(app, width=680, height=460, segmented_button_selected_color=accent_color)
+tabview.pack(pady=10, padx=10)
+
+weather_tab = tabview.add("Weather")
+activity_tab = tabview.add("Activities")
+settings_tab = tabview.add("Settings")
+
+# ==== Weather Tab Widgets ====
+city_entry = ctk.CTkEntry(weather_tab, placeholder_text="Enter City", width=200, height=35)
+city_entry.pack(pady=10)
+
+weather_label = ctk.CTkLabel(weather_tab, text="", text_color=text_color, font=("Helvetica", 20))
+weather_label.pack(pady=5)
+
+temp_label = ctk.CTkLabel(weather_tab, text="", text_color=text_color, font=("Helvetica", 40, "bold"))
+temp_label.pack(pady=5)
+
+desc_label = ctk.CTkLabel(weather_tab, text="", text_color=accent_color, font=("Helvetica", 18))
+desc_label.pack(pady=5)
+
+# ==== Fetch Weather ====
+def fetch_weather():
+    city = city_entry.get().strip()
+    if not city:
+        messagebox.showerror("Input Error", "Please enter a city name.")
+        return
+
+    try:
+        weather = get_weather(city)
+        if weather:
+            weather_label.configure(text=weather["city"])
+            temp_label.configure(text=f"{weather['temp']}°C")
+            desc_label.configure(text=weather["description"].title())
+            save_last_city(city)
+            log_weather_data(city, weather["temp"], weather["description"])
         else:
-            self.time_theme = "night"
+            messagebox.showerror("Error", "Weather data not found.")
+    except Exception as e:
+        messagebox.showerror("Error", str(e))
 
-        self.visual_theme = self.settings.get("theme", "anime")  # default to anime
-        self.current_theme = THEMES.get(self.visual_theme, THEMES["anime"])
+# ==== Button ====
+fetch_button = ctk.CTkButton(weather_tab, text="Get Weather", command=fetch_weather, fg_color=accent_color)
+fetch_button.pack(pady=10)
 
-        # Setup UI
-        self.create_widgets()
-        apply_theme(self.root, self.current_theme)
+# ==== Load Last City Automatically ====
+last_city = load_last_city()
+if last_city:
+    city_entry.insert(0, last_city)
+    fetch_weather()
 
-        # Preload last city
-        last_city = load_last_city()
-        if last_city:
-            self.city_entry.insert(0, last_city)
-            self.fetch_weather()
+# ==== Run App ====
+app.mainloop()
 
-    def create_widgets(self):
-        self.city_entry = tk.Entry(
-            self.root,
-            font=self.current_theme["font"],
-            bg=self.current_theme["bg"],
-            fg=self.current_theme["fg"]
-        )
-        self.city_entry.grid(row=0, column=0, padx=10, pady=10, sticky="ew")
-        self.root.grid_columnconfigure(0, weight=1)
 
-        self.fetch_button = tk.Button(
-            self.root,
-            text="Get Weather",
-            command=self.fetch_weather,
-            bg=self.current_theme["fg"],
-            fg=self.current_theme["bg"]
-        )
-        self.fetch_button.grid(row=0, column=1, padx=10, pady=10)
-
-        self.theme_button = tk.Button(
-            self.root,
-            text="Toggle Theme",
-            command=self.toggle_theme,
-            bg=self.current_theme["fg"],
-            fg=self.current_theme["bg"]
-        )
-        self.theme_button.grid(row=0, column=2, padx=10, pady=10)
-
-        self.city_label = tk.Label(
-            self.root,
-            text="",
-            font=self.current_theme["font"],
-            bg=self.current_theme["bg"],
-            fg=self.current_theme["fg"]
-        )
-        self.city_label.grid(row=1, column=0, columnspan=3, pady=10)
-
-        self.temp_label = tk.Label(
-            self.root,
-            text="",
-            font=self.current_theme["font"],
-            bg=self.current_theme["bg"],
-            fg=self.current_theme["fg"]
-        )
-        self.temp_label.grid(row=2, column=0, columnspan=3)
-
-        self.desc_label = tk.Label(
-            self.root,
-            text="",
-            font=self.current_theme["font"],
-            bg=self.current_theme["bg"],
-            fg=self.current_theme["fg"]
-        )
-        self.desc_label.grid(row=3, column=0, columnspan=3)
-
-    def fetch_weather(self):
-        city = self.city_entry.get().strip()
-        if not city:
-            messagebox.showerror("Input Error", "Please enter a city name.")
-            return
-
-        try:
-            weather = get_weather(city, units=self.units)
-            if weather:
-                self.city_label.config(text=weather["city"])
-                self.temp_label.config(text=f"{weather['temp']}°")
-                self.desc_label.config(text=weather["description"].title())
-
-                save_last_city(city)
-                log_weather_data(city=weather["city"], temp=weather["temp"], desc=weather["description"])
-            else:
-                messagebox.showerror("Weather Error", "Could not fetch weather data.")
-        except Exception as e:
-            messagebox.showerror("Error", f"Something went wrong:\n{e}")
-
-    def toggle_theme(self):
-        self.visual_theme = "marvel" if self.visual_theme == "anime" else "anime"
-        self.current_theme = THEMES.get(self.visual_theme)
-        apply_theme(self.root, self.current_theme)
-
-        # Update widgets
-        widgets = [
-            self.city_entry, self.fetch_button, self.theme_button,
-            self.city_label, self.temp_label, self.desc_label
-        ]
-        for widget in widgets:
-            widget.config(
-                bg=self.current_theme["bg"],
-                fg=self.current_theme["fg"],
-                font=self.current_theme["font"]
-            )
-
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = WeatherApp(root)
-    root.mainloop()
 
 

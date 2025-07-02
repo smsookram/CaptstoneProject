@@ -1,28 +1,30 @@
-# utils/style.py
+from datetime import datetime
 
-THEMES = {
-    "day": {
-        "bg": "#ffffff",
-        "fg": "#000000",
-        "font": ("Comic Sans MS", 12)
-    },
-    "night": {
-        "bg": "#1a1a1a",
-        "fg": "#f5f5f5",
-        "font": ("Courier New", 12)
-    },
-    "anime": {
-        "bg": "#fce4ec",  # light pink
-        "fg": "#880e4f",  # dark magenta
-        "font": ("Helvetica", 12, "bold")
-    },
-    "marvel": {
-        "bg": "#0d1b2a",  # navy
-        "fg": "#e63946",  # crimson red
-        "font": ("Impact", 12)
+def get_time_of_day():
+    hour = datetime.now().hour
+    return "day" if 6 <= hour < 18 else "night"
+
+def get_color_theme(selected_theme):
+    time_of_day = get_time_of_day()
+
+    themes = {
+        "anime": {
+            "day":    ("#fef6e4", "#001858", "#ff8906"),
+            "night":  ("#2b2d42", "#edf2f4", "#8d99ae")
+        },
+        "marvel": {
+            "day":    ("#e6f0ff", "#003366", "#ff4d4d"),
+            "night":  ("#1a1a2e", "#e94560", "#16213e")
+        }
     }
-}
 
-def apply_theme(root, theme):
-    root.configure(bg=theme["bg"])
+    return themes.get(selected_theme, themes["anime"])[time_of_day]
+
+FONT_LG = ("Helvetica", 40, "bold")
+FONT_MD = ("Helvetica", 20)
+FONT_SM = ("Helvetica", 16)
+
+ENTRY_WIDTH = 200
+TABVIEW_SIZE = (680, 460)
+
 
