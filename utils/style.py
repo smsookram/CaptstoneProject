@@ -4,8 +4,8 @@ def get_time_of_day():
     hour = datetime.now().hour
     return "day" if 6 <= hour < 18 else "night"
 
-def get_theme_colors(theme):
-    time = get_time_of_day()
+def get_theme_colors(theme, time_override=None):
+    time = time_override or get_time_of_day()
 
     if theme == "anime":
         return {
@@ -18,8 +18,13 @@ def get_theme_colors(theme):
         "night": {"bg": "#1a1a2e", "fg": "#e94560", "accent": "#16213e"}
     }[time]
 
-def get_background_image_path(theme):
-    time = get_time_of_day()
+    return {
+        "day": {"bg": "#e6f0ff", "fg": "#003366", "accent": "#ff4d4d"},
+        "night": {"bg": "#1a1a2e", "fg": "#e94560", "accent": "#16213e"}
+    }[time]
+
+def get_background_image_path(theme, time_override=None):
+    time = time_override or get_time_of_day()
     return f"assets/{theme}/{time}.jpg"
 
 
