@@ -6,3 +6,8 @@
 2025-06-30,New York,26,clear sky
 2025-06-30 20:22,New York,26,clear sky
 2025-06-30 20:23,New York,26,clear sky
+2025-07-02 19:59,New York,26,clear sky
+2025-07-02 19:59,Los Angeles,24,clear sky
+2025-07-02 19:59,Los Angeles,24,clear sky
+2025-07-02 19:59,Los Angeles,24,clear sky
+2025-07-02 19:59,Houston,33,clear sky

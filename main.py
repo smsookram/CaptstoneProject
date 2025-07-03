@@ -7,11 +7,7 @@ from core.theme_selector import select_theme
 from utils.style import get_color_theme
 from utils.style import FONT_LG, FONT_MD, FONT_SM, ENTRY_WIDTH, TABVIEW_SIZE
 
-...
 
-tabview = ctk.CTkTabview(app, width=TABVIEW_SIZE[0], height=TABVIEW_SIZE[1])
-...
-city_entry = ctk.CTkEntry(weather_tab, placeholder_text="Enter City", width=ENTRY_WIDTH, height=35)
 
 
 # ==== Initialize customtkinter ====
@@ -28,6 +24,13 @@ app = ctk.CTk()
 app.title("Weather Dashboard")
 app.geometry("700x500")
 app.configure(fg_color=bg_color)
+
+import customtkinter as ctk
+
+app = ctk.CTk()
+app.title("Weather Dashboard")
+app.geometry("700x500")
+
 
 # ==== Tabs using CTkTabview ====
 tabview = ctk.CTkTabview(app, width=680, height=460, segmented_button_selected_color=accent_color)
