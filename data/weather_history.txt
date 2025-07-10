@@ -50,3 +50,16 @@
 2025-07-02 21:21,Atlanta,81,clear sky
 2025-07-02 21:21,New York,77,clear sky
 2025-07-02 21:21,Miami,80,heavy intensity rain
+2025-07-02 21:27,Miami,27,overcast clouds
+2025-07-02 21:28,New york,25,clear sky
+2025-07-02 21:28,New york,25,clear sky
+2025-07-10 14:15,New york,28,clear sky
+2025-07-10 14:15,New york,28,clear sky
+2025-07-10 14:15,New york,28,clear sky
+2025-07-10 14:15,New york,28,clear sky
+2025-07-10 14:16,New york,28,clear sky
+2025-07-10 14:16,Orlando,33,broken clouds
+2025-07-10 14:16,Orlando,92,broken clouds
+2025-07-10 14:20,Orlando,33,broken clouds
+2025-07-10 14:20,Oviedo,24,clear sky
+2025-07-10 14:20,Oviedo,75,clear sky
