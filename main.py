@@ -5,6 +5,7 @@ from customtkinter import CTkImage
 from core.weather_api import get_weather
 from core.storage import save_last_city, load_last_city, log_weather_data
 from utils.style import get_theme_colors, get_background_image_path, get_time_of_day
+from utils.animations import apply_weather_effect
 
 # === Init CustomTkinter ===
 ctk.set_appearance_mode("System")
@@ -108,6 +109,7 @@ def main():
     unit_toggle.pack(pady=5)
 
     def fetch_weather():
+        apply_weather_effect(weather_tab, weather["description"])
         city = city_entry.get().strip()
         if not city:
             messagebox.showerror("Input Error", "Please enter a city.")
@@ -116,7 +118,6 @@ def main():
         try:
             units = "imperial" if unit_var.get() == "F" else "metric"
             weather = get_weather(city, units=units)
-            print(weather)
             if weather:
                 weather_label.configure(text=weather["city"])
                 temp_label.configure(text=f"{weather['temp']}°{unit_var.get()}")
