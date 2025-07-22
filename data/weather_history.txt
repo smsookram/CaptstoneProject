@@ -63,3 +63,16 @@
 2025-07-10 14:20,Orlando,33,broken clouds
 2025-07-10 14:20,Oviedo,24,clear sky
 2025-07-10 14:20,Oviedo,75,clear sky
+2025-07-10 18:50,Oviedo,18,clear sky
+2025-07-10 18:50,Oviedo,65,clear sky
+2025-07-10 18:50,New York,80,clear sky
+2025-07-10 18:50,New York,27,clear sky
+2025-07-10 18:50,Orlando,31,broken clouds
+2025-07-10 18:51,Orlando,31,broken clouds
+2025-07-17 12:36,Orlando,32,few clouds
+2025-07-17 12:42,Denver,20,broken clouds
+2025-07-17 12:43,Denver,69,broken clouds
+2025-07-17 12:43,Oviedo,68,overcast clouds
+2025-07-17 12:43,Oviedo,20,overcast clouds
+2025-07-17 12:43,Oviedo,68,overcast clouds
+2025-07-17 12:43,south carolina,88,broken clouds
