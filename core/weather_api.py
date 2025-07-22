@@ -29,6 +29,10 @@ def get_weather(city, units="metric"):
         return {
             "city": data["name"],
             "temp": round(data["main"]["temp"]),
+            "feels_like": round(data["main"]["feels_like"]),
+            "humidity": data["main"]["humidity"],
+            "temp_min": round(data["main"]["temp_min"]),
+            "temp_max": round(data["main"]["temp_max"]),
             "description": data["weather"][0]["description"]
         }
 

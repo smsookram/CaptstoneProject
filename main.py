@@ -88,6 +88,15 @@ def main():
     desc_label = ctk.CTkLabel(weather_tab, text="", text_color=colors["accent"], font=("Helvetica", 18))
     desc_label.pack(pady=5)
 
+    feels_like_label = ctk.CTkLabel(weather_tab, text="", text_color="gray", font=("Helvetica", 14))
+    feels_like_label.pack(pady=2)
+
+    humidity_label = ctk.CTkLabel(weather_tab, text="", text_color="gray", font=("Helvetica", 14))
+    humidity_label.pack(pady=2)
+
+    high_low_label = ctk.CTkLabel(weather_tab, text="", text_color="gray", font=("Helvetica", 14))
+    high_low_label.pack(pady=2)
+
     unit_var = ctk.StringVar(value="C")
 
     def toggle_unit():
@@ -107,10 +116,17 @@ def main():
         try:
             units = "imperial" if unit_var.get() == "F" else "metric"
             weather = get_weather(city, units=units)
+            print(weather)
             if weather:
                 weather_label.configure(text=weather["city"])
                 temp_label.configure(text=f"{weather['temp']}°{unit_var.get()}")
                 desc_label.configure(text=weather["description"].title())
+                feels_like_label.configure(text=f"Feels like: {weather['feels_like']}°{unit_var.get()}")
+                humidity_label.configure(text=f"Humidity: {weather['humidity']}%")
+                high_low_label.configure(
+                text=f"High: {weather['temp_max']}° / Low: {weather['temp_min']}°"
+)
+
                 save_last_city(city)
                 log_weather_data(city, weather["temp"], weather["description"])
             else:
