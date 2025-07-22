@@ -1,10 +1,11 @@
-# utils/animations.py
-import customtkinter as ctk
-from PIL import Image, ImageTk
 import os
+import customtkinter as ctk
+from customtkinter import CTkImage
+from PIL import Image, ImageTk
+
 
 # Store currently active animation
-_active_animation = {"label": None, "image": None}
+_active_animation = {"label": None, "frames": []}
 
 def apply_weather_effect(container, weather_desc):
     global _active_animation
@@ -12,12 +13,12 @@ def apply_weather_effect(container, weather_desc):
     # Clear any existing animation
     if _active_animation["label"]:
         _active_animation["label"].destroy()
-        _active_animation = {"label": None, "image": None}
+        _active_animation = {"label": None, "frames": []}
 
     weather_desc = weather_desc.lower()
     effect_file = None
 
-    # Match description to an animation file
+    # Match description to animation file
     if "rain" in weather_desc:
         effect_file = "rain.gif"
     elif "snow" in weather_desc:
@@ -33,33 +34,33 @@ def apply_weather_effect(container, weather_desc):
     path = os.path.join("assets", "effects", effect_file)
 
     try:
-        # Load the GIF (works best if resized beforehand in a GIF editor)
         img = Image.open(path)
         frames = []
 
         try:
             while True:
-                frames.append(img.copy())
-                img.seek(len(frames))  # move to next frame
+                frame = img.copy().convert("RGBA").resize((800, 450))
+                frames.append(CTkImage(light_image=frame, size=(800, 450)))
+                img.seek(len(frames))  # Go to next frame
         except EOFError:
             pass
 
-        gif_frames = [ImageTk.PhotoImage(f.resize((800, 450))) for f in frames]
+        if not frames:
+            return
 
-        label = ctk.CTkLabel(container, text="", image=gif_frames[0])
+        label = ctk.CTkLabel(container, text="", image=frames[0])
         label.place(relx=0.5, rely=0.5, anchor="center")
-        label.lower()  # send behind widgets
+        label.lower()
 
         def animate(index=0):
             if not label.winfo_exists():
                 return
-            label.configure(image=gif_frames[index])
-            label.image = gif_frames[index]
-            label.after(100, animate, (index + 1) % len(gif_frames))
+            label.configure(image=frames[index])
+            label.image = frames[index]
+            label.after(100, animate, (index + 1) % len(frames))
 
         animate()
-        _active_animation = {"label": label, "image": gif_frames[0]}
+        _active_animation = {"label": label, "frames": frames}
 
     except Exception as e:
         print(f"[Animation Error] {e}")
-
