@@ -82,3 +82,12 @@
 2025-07-22 13:50,Orlando,87,broken clouds
 2025-07-22 13:50,Tampa,89,broken clouds
 2025-07-22 13:50,Denver,89,few clouds
+2025-07-22 14:58,Denver,33,broken clouds
+2025-07-22 14:58,Denver,33,broken clouds
+2025-07-22 14:58,columbus,29,scattered clouds
+2025-07-22 14:58,columbus,29,scattered clouds
+2025-07-22 14:58,columbus,29,scattered clouds
+2025-07-22 14:58,columbus,84,scattered clouds
+2025-07-22 14:58,columbus,29,scattered clouds
+2025-07-22 14:58,columbus,84,scattered clouds
+2025-07-22 14:58,columbus,29,scattered clouds

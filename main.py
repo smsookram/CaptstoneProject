@@ -109,7 +109,6 @@ def main():
     unit_toggle.pack(pady=5)
 
     def fetch_weather():
-        apply_weather_effect(weather_tab, weather["description"])
         city = city_entry.get().strip()
         if not city:
             messagebox.showerror("Input Error", "Please enter a city.")
@@ -125,15 +124,17 @@ def main():
                 feels_like_label.configure(text=f"Feels like: {weather['feels_like']}°{unit_var.get()}")
                 humidity_label.configure(text=f"Humidity: {weather['humidity']}%")
                 high_low_label.configure(
-                text=f"High: {weather['temp_max']}° / Low: {weather['temp_min']}°"
-)
+                    text=f"High: {weather['temp_max']}° / Low: {weather['temp_min']}°"
+            )
 
+                apply_weather_effect(weather_tab, weather["description"])
                 save_last_city(city)
                 log_weather_data(city, weather["temp"], weather["description"])
             else:
                 messagebox.showerror("Error", "Could not retrieve weather.")
         except Exception as e:
             messagebox.showerror("Error", str(e))
+
 
     fetch_button = ctk.CTkButton(weather_tab, text="Get Weather", command=fetch_weather, fg_color=colors["accent"])
     fetch_button.pack(pady=10)
