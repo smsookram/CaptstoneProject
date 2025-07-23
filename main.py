@@ -6,6 +6,7 @@ from core.weather_api import get_weather
 from core.storage import save_last_city, load_last_city, log_weather_data
 from utils.style import get_theme_colors, get_background_image_path, get_time_of_day
 from utils.animations import apply_weather_effect
+from features.city_comparison import CityComparisonTab
 
 # === Init CustomTkinter ===
 ctk.set_appearance_mode("System")
@@ -76,8 +77,12 @@ def main():
     weather_anim_frame.place(relx=0, rely=0, relwidth=1, relheight=1)
     weather_anim_frame.lower()
 
+    city_compare_tab = tabview.add("City Comparison")
+    city_compare_frame = CityComparisonTab(city_compare_tab, colors=colors)
+    city_compare_frame.pack(fill="both", expand=True)
     activity_tab = tabview.add("Activities")
     settings_tab = tabview.add("Settings")
+    
 
     # Weather Tab Widgets
     city_entry = ctk.CTkEntry(weather_tab, placeholder_text="Enter City", width=200)
