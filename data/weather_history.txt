@@ -125,3 +125,15 @@
 2025-07-22 20:38,Miami,76,thunderstorm
 2025-07-22 20:38,Miami,24,thunderstorm
 2025-07-22 20:38,Miami,76,thunderstorm
+2025-07-22 20:38,Miami,24,thunderstorm
+2025-07-22 20:38,Miami,76,thunderstorm
+2025-07-22 20:38,Miami,76,thunderstorm
+2025-07-22 20:38,Miami,76,thunderstorm
+2025-07-22 20:39,Miami,76,thunderstorm
+2025-07-22 20:39,Miami,76,thunderstorm
+2025-07-22 20:42,Miami,24,thunderstorm
+2025-07-22 20:42,Miami,24,thunderstorm
+2025-07-22 20:42,Miami,24,thunderstorm
+2025-07-22 20:42,Miami,24,thunderstorm
+2025-07-22 20:43,Miami,75,thunderstorm
+2025-07-22 20:43,Miami,75,thunderstorm

@@ -1,4 +1,5 @@
 import os
+import tkinter as tk
 import customtkinter as ctk
 from customtkinter import CTkImage
 from PIL import Image, ImageTk
@@ -40,7 +41,7 @@ def apply_weather_effect(container, weather_desc):
         try:
             while True:
                 frame = img.copy().convert("RGBA").resize((800, 450))
-                frames.append(CTkImage(light_image=frame, size=(800, 450)))
+                frames.append(ImageTk.PhotoImage(frame))
                 img.seek(len(frames))  # Go to next frame
         except EOFError:
             pass
@@ -48,7 +49,7 @@ def apply_weather_effect(container, weather_desc):
         if not frames:
             return
 
-        label = ctk.CTkLabel(container, text="", image=frames[0])
+        label = tk.Label(container, image=frames[0], borderwidth=0, highlightthickness=0, bg="transparent")
         label.place(relx=0.5, rely=0.5, anchor="center")
         label.lift()
 

@@ -71,7 +71,7 @@ def main():
 
     weather_tab = tabview.add("Weather")
     # Add a background frame for the animation 
-    weather_anim_frame = ctk.CTkFrame(weather_tab, fg_color="transparent")
+    weather_anim_frame = ctk.CTkFrame(weather_tab, fg_color="lightblue")
     weather_anim_frame.place(relx=0.5, rely=0.5, anchor="center", relwidth=1, relheight=1)
     weather_anim_frame.lower()  
 
