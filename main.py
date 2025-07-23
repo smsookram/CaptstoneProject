@@ -70,10 +70,11 @@ def main():
     tabview.place(relx=0.5, rely=0.5, anchor="center")
 
     weather_tab = tabview.add("Weather")
-    # Add a background frame for the animation 
-    weather_anim_frame = ctk.CTkFrame(weather_tab, fg_color="lightblue")
-    weather_anim_frame.place(relx=0.5, rely=0.5, anchor="center", relwidth=1, relheight=1)
-    weather_anim_frame.lower()  
+
+    # Background frame for animation behind widgets
+    weather_anim_frame = ctk.CTkFrame(weather_tab, fg_color="transparent")
+    weather_anim_frame.place(relx=0, rely=0, relwidth=1, relheight=1)
+    weather_anim_frame.lower()
 
     activity_tab = tabview.add("Activities")
     settings_tab = tabview.add("Settings")
@@ -83,7 +84,6 @@ def main():
     city_entry.pack(pady=10)
 
     city_entry.bind("<Return>", lambda event: fetch_weather())
-
 
     weather_label = ctk.CTkLabel(weather_tab, text="", text_color=colors["fg"], font=("Helvetica", 20))
     weather_label.pack(pady=5)
@@ -130,7 +130,7 @@ def main():
                 humidity_label.configure(text=f"Humidity: {weather['humidity']}%")
                 high_low_label.configure(
                     text=f"High: {weather['temp_max']}° / Low: {weather['temp_min']}°"
-            )
+                )
 
                 apply_weather_effect(weather_anim_frame, weather["description"])
 
@@ -140,7 +140,6 @@ def main():
                 messagebox.showerror("Error", "Could not retrieve weather.")
         except Exception as e:
             messagebox.showerror("Error", str(e))
-
 
     fetch_button = ctk.CTkButton(weather_tab, text="Get Weather", command=fetch_weather, fg_color=colors["accent"])
     fetch_button.pack(pady=10)
@@ -179,15 +178,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
-
-
-
-
-

@@ -148,3 +148,6 @@
 2025-07-22 20:59,Denver,24,overcast clouds
 2025-07-22 21:00,Denver,76,overcast clouds
 2025-07-22 21:00,Columbus,75,broken clouds
+2025-07-22 21:23,Columbus,23,broken clouds
+2025-07-22 21:23,Miami,24,overcast clouds
+2025-07-22 21:23,Miami,75,overcast clouds
