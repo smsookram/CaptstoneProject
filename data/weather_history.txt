@@ -137,3 +137,14 @@
 2025-07-22 20:42,Miami,24,thunderstorm
 2025-07-22 20:43,Miami,75,thunderstorm
 2025-07-22 20:43,Miami,75,thunderstorm
+2025-07-22 20:44,Miami,24,thunderstorm
+2025-07-22 20:44,Miami,75,thunderstorm
+2025-07-22 20:44,Miami,24,thunderstorm
+2025-07-22 20:44,Miami,24,thunderstorm
+2025-07-22 20:44,Miami,24,thunderstorm
+2025-07-22 20:44,Miami,75,thunderstorm
+2025-07-22 20:44,Denver,77,overcast clouds
+2025-07-22 20:44,Denver,77,overcast clouds
+2025-07-22 20:59,Denver,24,overcast clouds
+2025-07-22 21:00,Denver,76,overcast clouds
+2025-07-22 21:00,Columbus,75,broken clouds
