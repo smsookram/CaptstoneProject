@@ -50,7 +50,7 @@ def apply_weather_effect(container, weather_desc):
 
         label = ctk.CTkLabel(container, text="", image=frames[0])
         label.place(relx=0.5, rely=0.5, anchor="center")
-        label.lower()
+        label.lift()
 
         def animate(index=0):
             if not label.winfo_exists():
