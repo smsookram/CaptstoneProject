@@ -72,7 +72,7 @@ def main():
     weather_tab = tabview.add("Weather")
 
     # Background frame for animation behind widgets
-    weather_anim_frame = ctk.CTkFrame(weather_tab, fg_color="transparent")
+    weather_anim_frame = ctk.CTkFrame(weather_tab, fg_color=colors["bg"])
     weather_anim_frame.place(relx=0, rely=0, relwidth=1, relheight=1)
     weather_anim_frame.lower()
 
@@ -132,8 +132,7 @@ def main():
                     text=f"High: {weather['temp_max']}° / Low: {weather['temp_min']}°"
                 )
 
-                apply_weather_effect(weather_anim_frame, weather["description"])
-
+                apply_weather_effect(weather_anim_frame, weather["description"], bg_color=colors["bg"])
                 save_last_city(city)
                 log_weather_data(city, weather["temp"], weather["description"])
             else:

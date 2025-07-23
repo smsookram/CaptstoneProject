@@ -1,14 +1,11 @@
 import os
-import tkinter as tk
-import customtkinter as ctk
-from customtkinter import CTkImage
+import tkinter as tk  # Use standard tkinter for animation label
 from PIL import Image, ImageTk
-
 
 # Store currently active animation
 _active_animation = {"label": None, "frames": []}
 
-def apply_weather_effect(container, weather_desc):
+def apply_weather_effect(container, weather_desc, bg_color="#ffffff"):
     global _active_animation
 
     # Clear any existing animation
@@ -49,9 +46,9 @@ def apply_weather_effect(container, weather_desc):
         if not frames:
             return
 
-        label = tk.Label(container, image=frames[0], borderwidth=0, highlightthickness=0, bg="transparent")
+        label = tk.Label(container, image=frames[0], borderwidth=0, highlightthickness=0, bg=bg_color)
         label.place(relx=0.5, rely=0.5, anchor="center")
-        label.lift()
+        label.lower()
 
         def animate(index=0):
             if not label.winfo_exists():
@@ -65,3 +62,6 @@ def apply_weather_effect(container, weather_desc):
 
     except Exception as e:
         print(f"[Animation Error] {e}")
+
+
+
