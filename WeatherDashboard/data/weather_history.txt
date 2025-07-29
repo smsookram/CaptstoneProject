@@ -1,0 +1,233 @@
+2025-06-30,New York,33,clear sky
+2025-06-30,New York,26,broken clouds
+2025-06-30,Los Angeles,27,clear sky
+2025-06-30,Los Angeles,27,clear sky
+2025-06-30,Los Angeles,27,clear sky
+2025-06-30,New York,26,clear sky
+2025-06-30 20:22,New York,26,clear sky
+2025-06-30 20:23,New York,26,clear sky
+2025-07-02 19:59,New York,26,clear sky
+2025-07-02 19:59,Los Angeles,24,clear sky
+2025-07-02 19:59,Los Angeles,24,clear sky
+2025-07-02 19:59,Los Angeles,24,clear sky
+2025-07-02 19:59,Houston,33,clear sky
+2025-07-02 20:07,Houston,33,clear sky
+2025-07-02 20:08,Houston,91,clear sky
+2025-07-02 20:08,Houston,91,clear sky
+2025-07-02 20:15,Houston,33,clear sky
+2025-07-02 20:29,Houston,32,clear sky
+2025-07-02 20:32,Houston,32,clear sky
+2025-07-02 20:33,Houston,32,clear sky
+2025-07-02 20:37,Houston,32,clear sky
+2025-07-02 20:41,Houston,32,clear sky
+2025-07-02 20:44,Houston,32,clear sky
+2025-07-02 20:47,Houston,32,clear sky
+2025-07-02 20:50,Houston,32,clear sky
+2025-07-02 20:52,Houston,32,clear sky
+2025-07-02 20:52,New York,25,clear sky
+2025-07-02 20:54,New York,25,clear sky
+2025-07-02 20:55,New York,25,clear sky
+2025-07-02 21:02,New York,25,clear sky
+2025-07-02 21:03,New York,25,clear sky
+2025-07-02 21:03,Los Angeles,23,clear sky
+2025-07-02 21:04,Los Angeles,23,clear sky
+2025-07-02 21:04,Los Angeles,72,clear sky
+2025-07-02 21:04,New York,25,clear sky
+2025-07-02 21:05,New York,25,clear sky
+2025-07-02 21:06,New York,25,clear sky
+2025-07-02 21:06,New York,25,clear sky
+2025-07-02 21:06,Dallas,29,overcast clouds
+2025-07-02 21:07,Dallas,29,overcast clouds
+2025-07-02 21:08,Dallas,29,overcast clouds
+2025-07-02 21:08,Orlando,26,overcast clouds
+2025-07-02 21:12,Orlando,26,overcast clouds
+2025-07-02 21:16,Orlando,26,overcast clouds
+2025-07-02 21:17,Orlando,26,overcast clouds
+2025-07-02 21:20,Orlando,26,overcast clouds
+2025-07-02 21:21,New York,25,clear sky
+2025-07-02 21:21,Atlanta,27,clear sky
+2025-07-02 21:21,Atlanta,27,clear sky
+2025-07-02 21:21,Atlanta,81,clear sky
+2025-07-02 21:21,New York,77,clear sky
+2025-07-02 21:21,Miami,80,heavy intensity rain
+2025-07-02 21:27,Miami,27,overcast clouds
+2025-07-02 21:28,New york,25,clear sky
+2025-07-02 21:28,New york,25,clear sky
+2025-07-10 14:15,New york,28,clear sky
+2025-07-10 14:15,New york,28,clear sky
+2025-07-10 14:15,New york,28,clear sky
+2025-07-10 14:15,New york,28,clear sky
+2025-07-10 14:16,New york,28,clear sky
+2025-07-10 14:16,Orlando,33,broken clouds
+2025-07-10 14:16,Orlando,92,broken clouds
+2025-07-10 14:20,Orlando,33,broken clouds
+2025-07-10 14:20,Oviedo,24,clear sky
+2025-07-10 14:20,Oviedo,75,clear sky
+2025-07-10 18:50,Oviedo,18,clear sky
+2025-07-10 18:50,Oviedo,65,clear sky
+2025-07-10 18:50,New York,80,clear sky
+2025-07-10 18:50,New York,27,clear sky
+2025-07-10 18:50,Orlando,31,broken clouds
+2025-07-10 18:51,Orlando,31,broken clouds
+2025-07-17 12:36,Orlando,32,few clouds
+2025-07-17 12:42,Denver,20,broken clouds
+2025-07-17 12:43,Denver,69,broken clouds
+2025-07-17 12:43,Oviedo,68,overcast clouds
+2025-07-17 12:43,Oviedo,20,overcast clouds
+2025-07-17 12:43,Oviedo,68,overcast clouds
+2025-07-17 12:43,south carolina,88,broken clouds
+2025-07-22 13:48,south carolina,34,few clouds
+2025-07-22 13:49,south carolina,94,few clouds
+2025-07-22 13:49,Columbus,82,clear sky
+2025-07-22 13:50,Orlando,87,broken clouds
+2025-07-22 13:50,Tampa,89,broken clouds
+2025-07-22 13:50,Denver,89,few clouds
+2025-07-22 14:58,Denver,33,broken clouds
+2025-07-22 14:58,Denver,33,broken clouds
+2025-07-22 14:58,columbus,29,scattered clouds
+2025-07-22 14:58,columbus,29,scattered clouds
+2025-07-22 14:58,columbus,29,scattered clouds
+2025-07-22 14:58,columbus,84,scattered clouds
+2025-07-22 14:58,columbus,29,scattered clouds
+2025-07-22 14:58,columbus,84,scattered clouds
+2025-07-22 14:58,columbus,29,scattered clouds
+2025-07-22 15:02,columbus,29,scattered clouds
+2025-07-22 15:02,Orlando,31,scattered clouds
+2025-07-22 15:02,Orlando,87,scattered clouds
+2025-07-22 15:07,Orlando,30,light rain
+2025-07-22 15:07,Orlando,30,light rain
+2025-07-22 15:08,Orlando,30,light rain
+2025-07-22 15:08,Orlando,30,light rain
+2025-07-22 15:08,Orlando,30,light rain
+2025-07-22 15:08,Columbus,28,broken clouds
+2025-07-22 15:08,Columbus,83,clear sky
+2025-07-22 15:13,Columbus,28,broken clouds
+2025-07-22 15:14,Columbus,28,broken clouds
+2025-07-22 15:15,Columbus,28,broken clouds
+2025-07-22 15:15,London,20,broken clouds
+2025-07-22 15:16,London,21,overcast clouds
+2025-07-22 15:16,London,21,overcast clouds
+2025-07-22 15:17,London,21,overcast clouds
+2025-07-22 15:17,Orlando,30,light rain
+2025-07-22 15:17,Orlando,86,light rain
+2025-07-22 15:32,Orlando,30,overcast clouds
+2025-07-22 15:33,Columbus,29,broken clouds
+2025-07-22 15:33,Columbus,83,broken clouds
+2025-07-22 20:34,Columbus,25,broken clouds
+2025-07-22 20:34,Columbus,78,broken clouds
+2025-07-22 20:34,London,64,overcast clouds
+2025-07-22 20:34,Orlando,84,clear sky
+2025-07-22 20:35,Orlando,84,clear sky
+2025-07-22 20:35,Miami,76,thunderstorm
+2025-07-22 20:37,Miami,24,thunderstorm
+2025-07-22 20:38,Miami,76,thunderstorm
+2025-07-22 20:38,Miami,76,thunderstorm
+2025-07-22 20:38,Miami,76,thunderstorm
+2025-07-22 20:38,Miami,24,thunderstorm
+2025-07-22 20:38,Miami,76,thunderstorm
+2025-07-22 20:38,Miami,24,thunderstorm
+2025-07-22 20:38,Miami,76,thunderstorm
+2025-07-22 20:38,Miami,76,thunderstorm
+2025-07-22 20:38,Miami,76,thunderstorm
+2025-07-22 20:39,Miami,76,thunderstorm
+2025-07-22 20:39,Miami,76,thunderstorm
+2025-07-22 20:42,Miami,24,thunderstorm
+2025-07-22 20:42,Miami,24,thunderstorm
+2025-07-22 20:42,Miami,24,thunderstorm
+2025-07-22 20:42,Miami,24,thunderstorm
+2025-07-22 20:43,Miami,75,thunderstorm
+2025-07-22 20:43,Miami,75,thunderstorm
+2025-07-22 20:44,Miami,24,thunderstorm
+2025-07-22 20:44,Miami,75,thunderstorm
+2025-07-22 20:44,Miami,24,thunderstorm
+2025-07-22 20:44,Miami,24,thunderstorm
+2025-07-22 20:44,Miami,24,thunderstorm
+2025-07-22 20:44,Miami,75,thunderstorm
+2025-07-22 20:44,Denver,77,overcast clouds
+2025-07-22 20:44,Denver,77,overcast clouds
+2025-07-22 20:59,Denver,24,overcast clouds
+2025-07-22 21:00,Denver,76,overcast clouds
+2025-07-22 21:00,Columbus,75,broken clouds
+2025-07-22 21:23,Columbus,23,broken clouds
+2025-07-22 21:23,Miami,24,overcast clouds
+2025-07-22 21:23,Miami,75,overcast clouds
+2025-07-22 21:27,Miami,24,overcast clouds
+2025-07-22 21:27,Miami,24,overcast clouds
+2025-07-22 21:28,Miami,24,overcast clouds
+2025-07-22 21:28,Miami,24,overcast clouds
+2025-07-22 21:31,Miami,24,overcast clouds
+2025-07-22 21:31,Miami,24,overcast clouds
+2025-07-22 21:31,Miami,24,overcast clouds
+2025-07-22 21:31,Miami,75,overcast clouds
+2025-07-22 21:31,Orlando,83,clear sky
+2025-07-22 21:31,Orlando,82,clear sky
+2025-07-22 21:31,Orlando,82,clear sky
+2025-07-22 21:31,Orlando,28,clear sky
+2025-07-22 21:31,Orlando,82,clear sky
+2025-07-22 21:55,Orlando,28,clear sky
+2025-07-23 14:17,Orlando,33,light rain
+2025-07-23 14:17,Napa,19,broken clouds
+2025-07-23 14:17,Napa,68,broken clouds
+2025-07-23 14:18,Napa,19,broken clouds
+2025-07-23 14:18,Napa,68,broken clouds
+2025-07-23 14:28,Napa,19,broken clouds
+2025-07-23 14:28,Napa,66,broken clouds
+2025-07-23 14:35,Napa,21,overcast clouds
+2025-07-23 14:46,Napa,22,overcast clouds
+2025-07-23 14:47,Indianapolis,31,scattered clouds
+2025-07-23 14:47,Indianapolis,88,scattered clouds
+2025-07-23 15:07,Indianapolis,32,scattered clouds
+2025-07-23 15:15,Indianapolis,31,broken clouds
+2025-07-23 15:17,Indianapolis,31,broken clouds
+2025-07-23 15:21,Indianapolis,31,broken clouds
+2025-07-23 15:25,Indianapolis,31,broken clouds
+2025-07-23 18:27,Indianapolis,32,scattered clouds
+2025-07-23 18:29,Los Angeles,25,clear sky
+2025-07-23 18:29,Los Angeles,25,clear sky
+2025-07-23 18:29,Los Angeles,25,clear sky
+2025-07-23 18:29,Los Angeles,78,clear sky
+2025-07-23 18:29,San Diego,77,few clouds
+2025-07-23 18:29,Columbus,88,few clouds
+2025-07-23 18:33,Columbus,31,few clouds
+2025-07-23 18:37,Columbus,31,few clouds
+2025-07-23 19:07,Columbus,30,scattered clouds
+2025-07-23 19:12,Columbus,30,scattered clouds
+2025-07-23 19:19,Columbus,30,scattered clouds
+2025-07-23 19:28,Columbus,30,scattered clouds
+2025-07-23 19:51,Columbus,29,clear sky
+2025-07-23 20:13,Columbus,29,scattered clouds
+2025-07-23 20:20,Columbus,29,scattered clouds
+2025-07-23 20:23,Columbus,83,scattered clouds
+2025-07-23 20:56,Columbus,26,clear sky
+2025-07-23 20:57,Columbus,79,clear sky
+2025-07-23 20:59,Columbus,26,clear sky
+2025-07-23 20:59,Columbus,79,clear sky
+2025-07-23 21:00,Omaha,88,clear sky
+2025-07-23 21:10,Omaha,31,scattered clouds
+2025-07-23 21:21,Omaha,30,scattered clouds
+2025-07-23 21:52,Omaha,30,scattered clouds
+2025-07-23 21:52,Omaha,30,scattered clouds
+2025-07-23 21:53,Omaha,86,scattered clouds
+2025-07-24 10:28,Omaha,22,overcast clouds
+2025-07-24 10:28,Omaha,72,overcast clouds
+2025-07-24 10:38,Omaha,22,overcast clouds
+2025-07-24 10:38,Omaha,72,overcast clouds
+2025-07-24 13:01,Omaha,24,overcast clouds
+2025-07-24 13:01,Columbus,32,broken clouds
+2025-07-24 13:01,Columbus,89,broken clouds
+2025-07-24 20:43,Columbus,32,scattered clouds
+2025-07-24 21:26,Columbus,29,scattered clouds
+2025-07-24 21:26,Columbus,85,scattered clouds
+2025-07-24 21:41,Columbus,29,scattered clouds
+2025-07-25 09:12,Columbus,28,broken clouds
+2025-07-25 09:12,Columbus,82,broken clouds
+2025-07-25 10:48,Columbus,30,broken clouds
+2025-07-25 10:53,Columbus,30,broken clouds
+2025-07-28 19:13,Columbus,30,clear sky
+2025-07-28 19:19,Columbus,86,clear sky
+2025-07-28 19:23,Columbus,30,clear sky
+2025-07-28 20:55,Columbus,27,mist
+2025-07-28 20:56,Columbus,27,mist
+2025-07-28 20:56,Columbus,27,thunderstorm
+2025-07-28 21:08,Columbus,25,scattered clouds
+2025-07-28 21:27,Columbus,24,thunderstorm
