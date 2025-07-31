@@ -22,7 +22,8 @@ class CityComparisonTab(ctk.CTkFrame):
         self.colors = colors
         self.unit_var = ctk.StringVar(value="C")
 
-        self.grid_rowconfigure(2, weight=1)   # results_frame row
+        self.grid_rowconfigure(3, weight=1)   # results_frame row
+        self.grid_rowconfigure(2, weight=1)  # Ensures results_frame (row 2) can expand fully
         self.grid_columnconfigure(0, weight=1)
         self.grid_columnconfigure(1, weight=1)
 
@@ -31,45 +32,50 @@ class CityComparisonTab(ctk.CTkFrame):
         self.city1_entry.bind("<Return>", lambda event: self.compare_weather())
 
         self.city2_entry = ctk.CTkEntry(self, placeholder_text="Enter Second City", width=200)
-        self.city2_entry.grid(row=0, column=1, padx=10, pady=10)
+        self.city2_entry.grid(row=0, column=1, padx=10, pady=10, sticky="nsew")
         self.city2_entry.bind("<Return>", lambda event: self.compare_weather())
 
         self.unit_toggle = ctk.CTkButton(self, text="Switch °C / °F", command=self.toggle_unit)
-        self.unit_toggle.grid(row=0, column=2, padx=10)
+        self.unit_toggle.grid(row=0, column=2, padx=10, sticky="nsew")
 
         self.compare_button = ctk.CTkButton(self, text="Compare", command=self.compare_weather)
-        self.compare_button.grid(row=1, column=0, columnspan=3, pady=10)
+        self.compare_button.grid(row=1, column=0, columnspan=3, pady=10, sticky="nsew")
 
         self.results_frame = ctk.CTkFrame(self)
-        self.results_frame.grid(row=2, column=0, columnspan=3, pady=10)
+        self.results_frame.grid(row=2, column=0, columnspan=3, pady=10, sticky="nsew")
 
         self.results_frame.grid_rowconfigure(3, weight=1)  # graphs row
         self.results_frame.grid_columnconfigure(0, weight=1)
         self.results_frame.grid_columnconfigure(1, weight=1)
         self.city1_label = ctk.CTkLabel(self.results_frame, text="", font=("Helvetica", 16, "bold"))
-        self.city1_label.grid(row=0, column=0, padx=20)
+        self.city1_label.grid(row=0, column=0, padx=20, sticky="ew")
 
         self.city2_label = ctk.CTkLabel(self.results_frame, text="", font=("Helvetica", 16, "bold"))
-        self.city2_label.grid(row=0, column=1, padx=20)
+        self.city2_label.grid(row=0, column=1, padx=20, sticky="ew")
 
         self.temp1_label = ctk.CTkLabel(self.results_frame, text="", font=("Helvetica", 14))
-        self.temp1_label.grid(row=1, column=0, padx=20)
+        self.temp1_label.grid(row=1, column=0, padx=20, sticky="ew")
 
         self.temp2_label = ctk.CTkLabel(self.results_frame, text="", font=("Helvetica", 14))
-        self.temp2_label.grid(row=1, column=1, padx=20)
+        self.temp2_label.grid(row=1, column=1, padx=20, sticky="ew")
 
         self.desc1_label = ctk.CTkLabel(self.results_frame, text="", font=("Helvetica", 12))
-        self.desc1_label.grid(row=2, column=0, padx=20)
+        self.desc1_label.grid(row=2, column=0, padx=20, sticky="ew")
 
         self.desc2_label = ctk.CTkLabel(self.results_frame, text="", font=("Helvetica", 12))
-        self.desc2_label.grid(row=2, column=1, padx=20)
+        self.desc2_label.grid(row=2, column=1, padx=20, sticky="ew")
 
         # Graph containers
         self.city1_graph_container = ctk.CTkFrame(self.results_frame)
         self.city1_graph_container.grid(row=3, column=0, padx=10, pady=10, sticky="nsew")
+        self.city1_graph_container.grid_rowconfigure(0, weight=1)
+        self.city1_graph_container.grid_columnconfigure(0, weight=1)
 
         self.city2_graph_container = ctk.CTkFrame(self.results_frame)
         self.city2_graph_container.grid(row=3, column=1, padx=10, pady=10, sticky="nsew")
+        self.city2_graph_container.grid_rowconfigure(0, weight=1)
+        self.city2_graph_container.grid_columnconfigure(0, weight=1)
+
 
         self.update_colors(colors)
 
@@ -229,6 +235,7 @@ class CityComparisonTab(ctk.CTkFrame):
 
         canvas = FigureCanvasTkAgg(fig, master=container)
         canvas.draw()
-        canvas.get_tk_widget().pack(expand=True, fill="both")
+        canvas.get_tk_widget().grid(row=0, column=0, sticky="nsew")
+
 
         plt.close(fig)  # Close figure to free memory and suppress warnings

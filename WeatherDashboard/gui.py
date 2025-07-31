@@ -155,9 +155,13 @@ class WeatherDashboardApp:
         self.city_compare_tab.grid_rowconfigure(0, weight=1)
         self.city_compare_tab.grid_columnconfigure(0, weight=1)
 
-        self.city_compare_frame = CityComparisonTab(scrollable.scrollable_frame, colors=self.colors)
-        self.city_compare_frame.pack(fill="both", expand=True)
+        scrollable.grid_rowconfigure(0, weight=1)
+        scrollable.grid_columnconfigure(0, weight=1)
 
+        self.city_compare_frame = CityComparisonTab(scrollable.scrollable_frame, colors=self.colors)
+        self.city_compare_frame.grid(row=0, column=0, sticky="nsew")
+        scrollable.scrollable_frame.grid_rowconfigure(0, weight=1)
+        scrollable.scrollable_frame.grid_columnconfigure(0, weight=1)
 
     def create_activity_tab(self):
         self.activity_city_entry = ctk.CTkEntry(self.activity_tab, placeholder_text="Enter City", width=200)
