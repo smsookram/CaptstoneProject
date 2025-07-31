@@ -22,6 +22,10 @@ class CityComparisonTab(ctk.CTkFrame):
         self.colors = colors
         self.unit_var = ctk.StringVar(value="C")
 
+        self.grid_rowconfigure(2, weight=1)   # results_frame row
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_columnconfigure(1, weight=1)
+
         self.city1_entry = ctk.CTkEntry(self, placeholder_text="Enter First City", width=200)
         self.city1_entry.grid(row=0, column=0, padx=10, pady=10)
         self.city1_entry.bind("<Return>", lambda event: self.compare_weather())
@@ -39,6 +43,9 @@ class CityComparisonTab(ctk.CTkFrame):
         self.results_frame = ctk.CTkFrame(self)
         self.results_frame.grid(row=2, column=0, columnspan=3, pady=10)
 
+        self.results_frame.grid_rowconfigure(3, weight=1)  # graphs row
+        self.results_frame.grid_columnconfigure(0, weight=1)
+        self.results_frame.grid_columnconfigure(1, weight=1)
         self.city1_label = ctk.CTkLabel(self.results_frame, text="", font=("Helvetica", 16, "bold"))
         self.city1_label.grid(row=0, column=0, padx=20)
 
@@ -59,10 +66,10 @@ class CityComparisonTab(ctk.CTkFrame):
 
         # Graph containers
         self.city1_graph_container = ctk.CTkFrame(self.results_frame)
-        self.city1_graph_container.grid(row=3, column=0, padx=10, pady=10)
+        self.city1_graph_container.grid(row=3, column=0, padx=10, pady=10, sticky="nsew")
 
         self.city2_graph_container = ctk.CTkFrame(self.results_frame)
-        self.city2_graph_container.grid(row=3, column=1, padx=10, pady=10)
+        self.city2_graph_container.grid(row=3, column=1, padx=10, pady=10, sticky="nsew")
 
         self.update_colors(colors)
 
@@ -190,7 +197,7 @@ class CityComparisonTab(ctk.CTkFrame):
         for widget in container.winfo_children():
             widget.destroy()
 
-        fig, ax = plt.subplots(figsize=(3, 2), dpi=100)
+        fig, ax = plt.subplots(figsize=(5, 3), dpi=100)
 
         # Group data by day to reduce points
         times = data["time"]
@@ -222,6 +229,6 @@ class CityComparisonTab(ctk.CTkFrame):
 
         canvas = FigureCanvasTkAgg(fig, master=container)
         canvas.draw()
-        canvas.get_tk_widget().pack()
+        canvas.get_tk_widget().pack(expand=True, fill="both")
 
         plt.close(fig)  # Close figure to free memory and suppress warnings

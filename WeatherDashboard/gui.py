@@ -70,7 +70,7 @@ class WeatherDashboardApp:
             border_width=1,
             corner_radius=15
         )
-        self.tabview.place(relx=0.5, rely=0.5, anchor="center")
+        self.tabview.pack(expand=True, fill="both", padx=20, pady=20)
 
         self.weather_tab = self.tabview.add("Weather")
         self.weather_anim_frame = ctk.CTkFrame(self.weather_tab, fg_color=self.colors["bg"])
@@ -78,6 +78,9 @@ class WeatherDashboardApp:
         self.weather_anim_frame.lower()
 
         self.city_compare_tab = self.tabview.add("City Comparison")
+        self.city_compare_tab.grid_rowconfigure(0, weight=1)
+        self.city_compare_tab.grid_columnconfigure(0, weight=1)
+
         self.activity_tab = self.tabview.add("Activities")
         self.settings_tab = self.tabview.add("Settings")
 
@@ -148,9 +151,13 @@ class WeatherDashboardApp:
 
     def create_city_comparison_tab(self):
         scrollable = ScrollableFrame(self.city_compare_tab)
-        scrollable.pack(fill="both", expand=True)
+        scrollable.grid(row=0, column=0, sticky="nsew")
+        self.city_compare_tab.grid_rowconfigure(0, weight=1)
+        self.city_compare_tab.grid_columnconfigure(0, weight=1)
+
         self.city_compare_frame = CityComparisonTab(scrollable.scrollable_frame, colors=self.colors)
         self.city_compare_frame.pack(fill="both", expand=True)
+
 
     def create_activity_tab(self):
         self.activity_city_entry = ctk.CTkEntry(self.activity_tab, placeholder_text="Enter City", width=200)
