@@ -225,5 +225,3 @@ class CityComparisonTab(ctk.CTkFrame):
         canvas.get_tk_widget().pack()
 
         plt.close(fig)  # Close figure to free memory and suppress warnings
-
-

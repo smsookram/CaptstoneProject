@@ -78,4 +78,3 @@ class WeatherDataCollector:
         except (KeyError, TypeError, ValueError) as e:
             self.logger.error(f"❌ Data formatting failed: {e}")
             return None
-
