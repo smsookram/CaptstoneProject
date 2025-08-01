@@ -4,6 +4,8 @@ import logging
 from datetime import datetime
 from typing import Dict, Optional
 from config.weather_api import OPENWEATHER_API_KEY
+from core.weather_api import get_weather, get_hourly_forecast
+from geopy.geocoders import Nominatim
 
 class WeatherDataCollector:
     def __init__(self, api_key: str = OPENWEATHER_API_KEY):
@@ -78,3 +80,31 @@ class WeatherDataCollector:
         except (KeyError, TypeError, ValueError) as e:
             self.logger.error(f"❌ Data formatting failed: {e}")
             return None
+        
+    def get_weather_with_forecast(self, city: str, units: str = "metric") -> Optional[Dict]:
+        # Step 1: Get current weather
+        current = self.get_current_weather(city, units)
+        if not current:
+            return None
+
+        # Step 2: Use geopy to get coordinates for the city
+        geolocator = Nominatim(user_agent="weather_dashboard")
+        location = geolocator.geocode(city)
+        if not location:
+            self.logger.error("❌ Could not get coordinates for the city.")
+            return None
+
+        latitude = location.latitude
+        longitude = location.longitude
+
+        # Step 3: Get hourly forecast from Open-Meteo
+        try:
+            forecast = get_hourly_forecast(latitude, longitude)
+        except Exception as e:
+            self.logger.warning(f"⚠️ Failed to get forecast: {e}")
+            forecast = []
+
+        return {
+            "current": current,
+            "forecast": forecast  # A list of (time, temperature) tuples
+        }

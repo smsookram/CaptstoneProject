@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import messagebox
 from PIL import Image
 from customtkinter import CTkImage
-from core.weather_api import get_weather
+from core.weather_api import get_weather, get_hourly_forecast
 from core.storage import save_last_city, load_last_city, log_weather_data
 from utils.scrollable_frame import ScrollableFrame
 from utils.style import get_theme_colors, get_background_image_path, get_time_of_day
@@ -109,6 +109,10 @@ class WeatherDashboardApp:
         self.high_low_label = ctk.CTkLabel(self.weather_tab, text="", text_color="gray", font=("Helvetica", 14))
         self.high_low_label.pack(pady=2)
 
+        self.hourly_frame = ctk.CTkFrame(self.weather_tab)
+        self.hourly_frame.pack(pady=10)
+        self.hourly_labels = []
+
         self.unit_var = ctk.StringVar(value="C")
 
         self.unit_toggle = ctk.CTkButton(self.weather_tab, text="Switch °C / °F", command=self.toggle_unit)
@@ -126,7 +130,10 @@ class WeatherDashboardApp:
         try:
             units = "imperial" if self.unit_var.get() == "F" else "metric"
             weather = get_weather(city, units=units)
+            forecast = get_hourly_forecast(city)
+
             if weather:
+            # Display current weather
                 self.weather_label.configure(text=weather["city"])
                 self.temp_label.configure(text=f"{weather['temp']}°{self.unit_var.get()}")
                 self.desc_label.configure(text=weather["description"].title())
@@ -139,10 +146,36 @@ class WeatherDashboardApp:
                 apply_weather_effect(self.weather_anim_frame, weather["description"], bg_color=self.colors["bg"])
                 save_last_city(city)
                 log_weather_data(city, weather["temp"], weather["description"])
+
+            # Clear previous hourly forecast
+                for label in self.hourly_labels:
+                    label.destroy()
+                self.hourly_labels = []
+
+            # Display new hourly forecast (if any)
+                if forecast:
+                    for hour in forecast[:6]:  # Next 6 hours
+                        time_str = hour["time"].split("T")[1][:5]  # HH:MM format
+                        label = ctk.CTkLabel(
+                            self.hourly_frame,
+                            text=f"{time_str}: {hour['temp']}°{self.unit_var.get()} | 💧 {hour['humidity']}% | 🌬 {hour['wind']} km/h",
+                            text_color="black",
+                            font=("Helvetica", 12)
+                        )
+                        label.pack(anchor="w")
+                        self.hourly_labels.append(label)
+                else:
+                    print("No hourly forecast data available.")
+
             else:
                 messagebox.showerror("Error", "Could not retrieve weather.")
+
         except Exception as e:
             messagebox.showerror("Error", str(e))
+
+
+        print("Hourly forecast received:", weather.get("hourly"))
+
 
     def toggle_unit(self):
         current = self.unit_var.get()
