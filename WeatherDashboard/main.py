@@ -35,9 +35,6 @@ def select_theme_popup():
 
     return selected_theme.get('theme', 'anime')
 
-
-
-
 def main():
     app = ctk.CTk()
     user_theme = select_theme_popup()
