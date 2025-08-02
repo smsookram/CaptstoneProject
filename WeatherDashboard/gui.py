@@ -130,7 +130,7 @@ class WeatherDashboardApp:
         try:
             units = "imperial" if self.unit_var.get() == "F" else "metric"
             weather = get_weather(city, units=units)
-            forecast = get_hourly_forecast(city)
+            forecast = get_hourly_forecast(city, unit=self.unit_var.get())
 
             if weather:
             # Display current weather
@@ -174,10 +174,9 @@ class WeatherDashboardApp:
             messagebox.showerror("Error", str(e))
 
 
-        print("Hourly forecast received:", weather.get("hourly"))
-
-
     def toggle_unit(self):
+        if not self.city_entry.get().strip():
+            return 
         current = self.unit_var.get()
         self.unit_var.set("F" if current == "C" else "C")
         self.fetch_weather()

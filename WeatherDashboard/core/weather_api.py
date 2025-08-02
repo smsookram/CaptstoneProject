@@ -40,46 +40,56 @@ def get_weather(city, units="metric"):
     except requests.RequestException as e:
         raise WeatherAPIError(str(e))
 
-def get_hourly_forecast(city_name):
+def get_hourly_forecast(city_name, unit="C"):
     try:
-        # Step 1: Get coordinates from city name
+        # Get coordinates from city name
         geolocator = Nominatim(user_agent="weather_app")
         location = geolocator.geocode(city_name)
         if not location:
-            print(f"Could not find coordinates for {city_name}")
             return None
 
         lat = location.latitude
         lon = location.longitude
 
-        # Step 2: Fetch hourly forecast data
+        # Fetch hourly forecast data
         url = (
             f"https://api.open-meteo.com/v1/forecast?"
             f"latitude={lat}&longitude={lon}&"
             f"hourly=temperature_2m,relative_humidity_2m,precipitation_probability,"
             f"weathercode,windspeed_10m&timezone=auto"
         )
-
+        
         response = requests.get(url)
+        if response.status_code != 200:
+            print(f"Failed to get weather data: {response.status_code}")
+            return None
+        
         data = response.json()
 
+        hourly = data.get("hourly")
         if "hourly" not in data:
-            print("Hourly data not found in response.")
             return None
+        
+        # Parse and organize hourly data
+        hours = hourly.get("time", [])
+        temps = hourly.get("temperature_2m", [])
+        humidities = hourly.get("relative_humidity_2m", [])
+        precips = hourly.get("precipitation_probability", [])
+        weathercodes = hourly.get("weathercode", [])
+        winds = hourly.get("windspeed_10m", [])
+        
+        if unit == "F":
+            temps = [(t * 9/5) + 32 for t in temps]
 
-        # Step 3: Parse and organize hourly data
         forecast_data = []
-        hourly = data["hourly"]
-        hours = hourly["time"]
-
         for i in range(len(hours)):
             forecast_data.append({
                 "time": hours[i],
-                "temp": hourly["temperature_2m"][i],
-                "humidity": hourly["relative_humidity_2m"][i],
-                "precip_prob": hourly["precipitation_probability"][i],
-                "weathercode": hourly["weathercode"][i],
-                "wind": hourly["windspeed_10m"][i]
+                "temp": temps[i],
+                "humidity": humidities[i],
+                "precip_prob": precips[i],
+                "weathercode": weathercodes[i],
+                "wind": winds[i]
             })
 
         return forecast_data
