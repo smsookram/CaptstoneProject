@@ -82,12 +82,12 @@ class WeatherDataCollector:
             return None
         
     def get_weather_with_forecast(self, city: str, units: str = "metric") -> Optional[Dict]:
-        # Step 1: Get current weather
+        # Get current weather
         current = self.get_current_weather(city, units)
         if not current:
             return None
 
-        # Step 2: Use geopy to get coordinates for the city
+        # Use geopy to get coordinates for the city
         geolocator = Nominatim(user_agent="weather_dashboard")
         location = geolocator.geocode(city)
         if not location:
@@ -97,7 +97,7 @@ class WeatherDataCollector:
         latitude = location.latitude
         longitude = location.longitude
 
-        # Step 3: Get hourly forecast from Open-Meteo
+        # Get hourly forecast from Open-Meteo
         try:
             forecast = get_hourly_forecast(latitude, longitude)
         except Exception as e:

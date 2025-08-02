@@ -198,10 +198,11 @@ class WeatherDashboardApp:
     def create_activity_tab(self):
         self.activity_city_entry = ctk.CTkEntry(self.activity_tab, placeholder_text="Enter City", width=200)
         self.activity_city_entry.pack(pady=10)
-
+        
         self.activity_suggestions_box = ctk.CTkTextbox(self.activity_tab, height=200, width=400)
+        self.activity_suggestions_box.configure(state="disabled")
         self.activity_suggestions_box.pack(pady=10)
-
+        
         self.activity_suggest_btn = ctk.CTkButton(self.activity_tab, text="Suggest Activities", command=self.on_activity_suggest_click)
         self.activity_suggest_btn.pack(pady=5)
 
@@ -219,17 +220,21 @@ class WeatherDashboardApp:
 
             weather_desc = weather["description"]
             temperature = weather["temp"]
-
             suggestions = suggest_activities(weather_desc, temperature)
 
+            self.activity_suggestions_box.configure(state="normal")
             self.activity_suggestions_box.delete("1.0", "end")
             self.activity_suggestions_box.insert("end", f"Weather: {weather_desc.title()} ({temperature}°{self.unit_var.get()})\n\n")
             for activity in suggestions:
                 self.activity_suggestions_box.insert("end", f"- {activity}\n")
+            self.activity_suggestions_box.configure(state="disabled")
+            self.activity_suggestions_box.lift()
 
         except Exception as e:
+            self.activity_suggestions_box.configure(state="normal")
             self.activity_suggestions_box.delete("1.0", "end")
             self.activity_suggestions_box.insert("end", f"Error: {e}")
+            self.activity_suggestions_box.configure(state="disabled")
     
     def create_trivia_tab(self):
     # Feedback area

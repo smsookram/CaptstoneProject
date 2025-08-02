@@ -18,13 +18,13 @@ def apply_weather_effect(container, weather_desc, bg_color="#ffffff"):
 
     # Match description to animation file
     if "rain" in weather_desc:
-        effect_file = "rain.gif"
+        effect_file = "rain.jpg"
     elif "snow" in weather_desc:
-        effect_file = "snow.gif"
+        effect_file = "snow.jpg"
     elif "cloud" in weather_desc:
-        effect_file = "clouds.gif"
+        effect_file = "clouds.jpg"
     elif "clear" in weather_desc:
-        effect_file = "sun.gif"
+        effect_file = "sun.jpg"
 
     if not effect_file:
         return
@@ -34,6 +34,10 @@ def apply_weather_effect(container, weather_desc, bg_color="#ffffff"):
     try:
         img = Image.open(path)
         frames = []
+
+        container.update_idletasks()
+        width = container.winfo_width()
+        height = container.winfo_height()
 
         try:
             while True:

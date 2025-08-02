@@ -1,12 +1,12 @@
 import os
 import customtkinter as ctk
-from gui import WeatherDashboardApp  # Our big GUI class (in gui.py)
+from gui import WeatherDashboardApp  # GUI class (in gui.py)
 from features.trivia import get_five_questions
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 print("Working Directory:", os.getcwd())
 
-# === Init CustomTkinter Appearance and Theme ===
+# CustomTkinter Appearance and Theme
 ctk.set_appearance_mode("System")
 ctk.set_default_color_theme("blue")
 
