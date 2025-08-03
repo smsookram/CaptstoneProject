@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 
-# Set the base directory (the repo you cloned)
+# Set the base directory 
 team6 = os.getcwd()  
 
 combined_df = pd.DataFrame()

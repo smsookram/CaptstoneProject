@@ -1,7 +1,7 @@
 import customtkinter as ctk
 from tkinter import messagebox
 from core.weather_api import get_weather
-from core.error_handling import WeatherAPIError  # Make sure this import matches your project structure
+from core.error_handling import WeatherAPIError  
 import datetime
 from utils.geocode import geocode_city
 from open_meteo import OpenMeteo
@@ -102,7 +102,6 @@ class CityComparisonTab(ctk.CTkFrame):
         current = self.unit_var.get()
         new_unit = "F" if current == "C" else "C"
         self.unit_var.set(new_unit)
-        print(f"Toggled unit to: {new_unit}")  # Debug print to console
         self.compare_weather()  # Trigger re-compare with new unit
 
     def compare_weather(self):
@@ -154,8 +153,8 @@ class CityComparisonTab(ctk.CTkFrame):
             daily_avg2 = self._daily_avg_temps(history2["time"], history2["temp"])
 
             all_temps = daily_avg1 + daily_avg2
-            y_min = min(all_temps) - 2  # small padding below
-            y_max = max(all_temps) + 2  # small padding above
+            y_min = min(all_temps) - 2  
+            y_max = max(all_temps) + 2  
 
             self.draw_graph(history1, self.city1_graph_container, city1, weather_type="temp", y_limits=(y_min, y_max))
             self.draw_graph(history2, self.city2_graph_container, city2, weather_type="temp", y_limits=(y_min, y_max))
@@ -222,7 +221,7 @@ class CityComparisonTab(ctk.CTkFrame):
         ax.plot(days, avg_temps, color=self.colors["accent"], marker='o')
 
         ax.set_title(f"{title} - {'Temperature' if weather_type == 'temp' else 'Precipitation (mm)'}", fontsize=9)
-        ax.xaxis.set_major_formatter(mdates.DateFormatter('%b %d'))  # Format date labels like 'Jul 23'
+        ax.xaxis.set_major_formatter(mdates.DateFormatter('%b %d'))  # Format date labels 
         ax.xaxis.set_major_locator(mdates.DayLocator())  # Show tick for each day
 
         if y_limits:

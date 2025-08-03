@@ -8,7 +8,7 @@ df = pd.read_csv("weatherdashboard/data/combined_weather_data.csv")
 # Drop rows with NaN values in key columns for trivia
 df = df.dropna(subset=["city", "temperature_2m_mean (°F)", "time"])
 
-# Convert temperature column to numeric (same column as above)
+# Convert temperature column to numeric 
 df["temperature_2m_mean (°F)"] = pd.to_numeric(df["temperature_2m_mean (°F)"], errors="coerce")
 df = df.dropna(subset=["temperature_2m_mean (°F)"])
 
@@ -84,7 +84,7 @@ def get_five_questions():
     return questions
 
 
-# Optional quick test
+# quick test
 if __name__ == "__main__":
     sample_qs = get_five_questions()
     for i, q in enumerate(sample_qs, start=1):

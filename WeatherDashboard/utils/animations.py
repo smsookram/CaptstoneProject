@@ -1,5 +1,5 @@
 import os
-import tkinter as tk  # Use standard tkinter for animation label
+import tkinter as tk  
 from PIL import Image, ImageTk
 
 # Store currently active animation
