@@ -309,3 +309,18 @@
 2025-08-02 12:38,Orlando,91,few clouds
 2025-08-02 12:49,Orlando,33,few clouds
 2025-08-02 12:53,Orlando,33,few clouds
+2025-08-03 19:59,Orlando,32,thunderstorm
+2025-08-03 19:59,Columbus,25,few clouds
+2025-08-03 19:59,Columbus,77,few clouds
+2025-08-03 20:15,Columbus,25,few clouds
+2025-08-03 20:15,New York,25,smoke
+2025-08-03 20:16,New York,76,smoke
+2025-08-03 20:18,New York,25,smoke
+2025-08-03 20:19,Columbus,25,few clouds
+2025-08-03 20:19,Columbus,77,few clouds
+2025-08-03 20:24,Columbus,25,few clouds
+2025-08-03 20:24,New York,25,smoke
+2025-08-03 20:24,New York,76,smoke
+2025-08-03 20:28,New York,25,smoke
+2025-08-03 20:28,Columbus,24,few clouds
+2025-08-03 20:29,Columbus,77,few clouds
